@@ -17,6 +17,7 @@
 ../DTV/dmablit/,dmatest.prg,interactive,0
 #TODO:
 #../DTV/dmatime,dmatime.prg,exitcode
+../DTV/dummy/,incbank.prg,exitcode,30000000
 ../DTV/fulltime/,fulltime.prg,interactive,0
 ../DTV/fulltime/,fulltime_dtv.prg,interactive,0
 #TODO:
