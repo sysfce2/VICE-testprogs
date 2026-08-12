@@ -11,10 +11,11 @@ ROMCHARSET=1
 
         * = $0000
 
-        !if (CARTTYPE=0) or (CARTTYPE=2) or (CARTTYPE=3) {
+        !if (CARTTYPE=0) or (CARTTYPE=2) or (CARTTYPE=3) or (CARTTYPE=4) {
         ; Ultimax ROML
         ; MAX Basic ROML
         ; Easyflash ROML
+        ; Multimax ROML
         !byte $c0,$c0
         !scrxor $c0, "-8000-"
         !fill $1000-8, $e0
@@ -31,10 +32,11 @@ iotagoffset = 4
 
         !pseudopc $e000 {
 
-        !if (CARTTYPE=0) or (CARTTYPE=2) or (CARTTYPE=3) {
+        !if (CARTTYPE=0) or (CARTTYPE=2) or (CARTTYPE=3) or (CARTTYPE=4) {
                 ; Ultimax ROMH
                 ; MAX Basic ROMH
                 ; Easyflash ROMH
+                ; Multimax ROML
                 !byte $e0, $e0, $e0, $e0
                 !byte $e0, $e0, $e0, $e0, $e0
                 !scrxor $c0, "-e000-", $e0
@@ -51,6 +53,7 @@ iotagoffset = 4
         }
        
 start1:
+
         ldx #0
 -
         lda stub - ($e000 - $8000),x
@@ -83,6 +86,11 @@ stub:
 
         ; this runs in ROM again, but now at ROMH (ultimax)
 start:
+        !if (CARTTYPE=4) {
+        ; MultiMAX (disable register latch, enable 2k external ram)
+        sta $de80
+        sta $0880
+        }
 
         ; disable irq sources
         lda #$00
@@ -410,6 +418,44 @@ tag4kdumplen=$0d
         cpx #$05
         bne -
 
+        ldx #0
+-
+        lda $d000+tagoffset,x
+        sta $0400+$21+(0*40),x
+        lda $d100+tagoffset,x
+        sta $0400+$21+(1*40),x
+        lda $d200+tagoffset,x
+        sta $0400+$21+(2*40),x
+        lda $d300+tagoffset,x
+        sta $0400+$21+(3*40),x
+        lda $d400+tagoffset,x
+        sta $0400+$21+(4*40),x
+        lda $d500+tagoffset,x
+        sta $0400+$21+(5*40),x
+        lda $d600+tagoffset,x
+        sta $0400+$21+(6*40),x
+        lda $d700+tagoffset,x
+        sta $0400+$21+(7*40),x
+        lda $d800+tagoffset,x
+        sta $0400+$21+(8*40),x
+        lda $d900+tagoffset,x
+        sta $0400+$21+(9*40),x
+        lda $da00+tagoffset,x
+        sta $0400+$21+(10*40),x
+        lda $db00+tagoffset,x
+        sta $0400+$21+(11*40),x
+        lda $dc00+tagoffset,x
+        sta $0400+$21+(12*40),x
+        lda $dd00+tagoffset,x
+        sta $0400+$21+(13*40),x
+        lda $de00+tagoffset,x
+        sta $0400+$21+(14*40),x
+        lda $df00+tagoffset,x
+        sta $0400+$21+(15*40),x
+
+        inx
+        cpx #$02
+        bne -
 
         inc $d020
         dec $d020
@@ -440,7 +486,7 @@ characters:
         !word start
         }
 
-        !if (CARTTYPE=0) or (CARTTYPE=2) or (CARTTYPE=3) {
+        !if (CARTTYPE=0) or (CARTTYPE=2) or (CARTTYPE=3) or (CARTTYPE=4) {
         ; ultimax
         ; MAX BASIC
         ; Easyflash

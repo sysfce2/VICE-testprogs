@@ -1,5 +1,5 @@
 
-CARTTYPE = 0
+CARTTYPE = 3    ; Easyflash
 
 PAYLOADLOC = $0600
 

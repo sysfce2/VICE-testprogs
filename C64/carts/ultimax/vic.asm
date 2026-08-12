@@ -43,7 +43,7 @@ framecount = $02
         lda #$33
         sta $01
         
-        !if CARTTYPE = 0 {  ; easyflash
+        !if CARTTYPE = 3 {  ; easyflash
         lda #%00000110      ; 8k game
         sta $de02
         }
@@ -126,7 +126,7 @@ hbf:    sta $f000,x
         lda #$35
         sta $01
 
-        !if CARTTYPE = 0 {  ; easyflash
+        !if CARTTYPE = 3 {  ; easyflash
         !if MODE = 0 {
         lda #%00000101      ; ultimax
         }
@@ -460,7 +460,7 @@ loop:
         cmp #%11111101 ; arrow left
         bne +
 
-        !if CARTTYPE = 0 {  ; easyflash
+        !if CARTTYPE = 3 {  ; easyflash
         ldx #%00000101      ; ultimax
         stx $de02
         }
@@ -473,7 +473,7 @@ loop:
         cmp #%11111110 ; 1
         bne +
         
-        !if CARTTYPE = 0 {  ; easyflash
+        !if CARTTYPE = 3 {  ; easyflash
         ldx #%00000110      ; 8k game
         stx $de02
         }
@@ -486,7 +486,7 @@ loop:
         cmp #%11110111 ; 2
         bne +
         
-        !if CARTTYPE = 0 {  ; easyflash
+        !if CARTTYPE = 3 {  ; easyflash
         ldx #%00000111      ; 16k game
         stx $de02
         }

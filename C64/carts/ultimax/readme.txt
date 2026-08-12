@@ -1,10 +1,11 @@
 
-ultimax.bin
-ultimax-maxbasic.bin
-ultimax-rr.bin
-ultimax-ef.bin
+ultimax.bin/.crt
+ultimax-maxbasic.bin/.crt
+ultimax-multimax.bin/.crt
+ultimax-rr.bin/.crt
+ultimax-ef.bin/.crt
 
-This test shows the memory mapping in the CPU cycle.
+These tests shows the memory mapping in the CPU cycle.
 
 It shows 16 lines, with each line mapped to a different vram:
 
@@ -31,7 +32,6 @@ The third block shows what can be read from I/O pages $d0..-$df..
 
 -------------------------------------------------------------------------------
 
-
 8k-vic-rr.bin
 16k-vic-rr.bin
 ultimax-vic-rr.bin
@@ -50,6 +50,40 @@ Keys:
 
 Note: the 3 programs are the same program, which only starts with a different
       default config (for automatic testing)
+
+-------------------------------------------------------------------------------
+
+ultimax-vic.crt
+ultimax-vic-maxbasic.crt
+ultimax-vic-multimax.crt
+
+Similar to the above tests, these show the memory mapping in the VICII cycle,
+but they are specifically designed to run from cartridge on an actual
+MAX Machine
+
+These tests can also be used to observe the differences between a C64 in
+ultimax mode, and an actual MAX Machine (CIA mirrors, external RAM)
+
+It shows 16 lines (example, ultimax-vic on C64):
+
+                                        screen charset
+
+012345678901234567890123456789012345    $0000   $0000   - numbers indicate RAM
+123456789012345678901234567890123456    $0400   $0000
+234567890123456789012345678901234567    $0800   $0800   - on MAX Machine this has
+345678901234567890123456789012345678    $0c00   $0800     to be external RAM
+------------------------------------    $1000   $1000
+------------------------------------    $1400   $1000
+------------------------------------    $1800   $1800
+------------------------------------    $1c00   $1800
+------------------------------------    $2000   $2000
+------------------------------------    $2400   $2000
+------------------------------------    $2800   $2800
+------------------------------------    $2c00   $2800
+EFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH    $f000   $f000   - letters indicate ROM
+FGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHA    $f400   $f000
+GHABCDEFGHABCDEFGHABCDEFGHABCDEFGHAB    $f800   $f800
+HABCDEFGHABCDEFGHABCDEFGHABCDEFGHABC    $fc00   $f800
 
 -------------------------------------------------------------------------------
 Results

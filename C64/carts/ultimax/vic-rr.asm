@@ -1,5 +1,5 @@
 
-CARTTYPE = 1
+CARTTYPE = 1    ; Retro Replay
 
 PAYLOADLOC = $0600
 
